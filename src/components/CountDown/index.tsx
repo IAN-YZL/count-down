@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import TimeBlock from "./TimeBlock";
 import styled from "styled-components";
+import { Progress } from "antd";
 
 const CountDownWrapper = styled.div`
   background-color: rgb(128, 6, 0, 0.6);
@@ -17,6 +18,7 @@ const HOUR_DOMINATOR = MINUTE_DOMINATOR * 60;
 const DAY_DOMINATOR = HOUR_DOMINATOR * 24;
 
 const TARGET_TIME = "2022-08-27 18:30:00 GMT-500";
+const START_TIME = "2022-03-03 10:00:00 GMT-500";
 
 const getTime = (): TimeProps => {
   let leftTime = new Date(TARGET_TIME).getTime() - new Date().getTime();
@@ -27,11 +29,17 @@ const getTime = (): TimeProps => {
   const leftMinute = Math.ceil(leftTime / MINUTE_DOMINATOR);
   leftTime = leftTime % MINUTE_DOMINATOR;
   const leftSecond = Math.ceil(leftTime / SECOND_DOMINATOR);
+  const percent = Math.floor(
+    ((new Date().getTime() - new Date(START_TIME).getTime()) /
+      (new Date(TARGET_TIME).getTime() - new Date(START_TIME).getTime())) *
+      100
+  );
   return {
     leftDay,
     leftHour,
     leftMinute,
     leftSecond,
+    percent,
   };
 };
 
@@ -40,6 +48,7 @@ interface TimeProps {
   leftHour: number;
   leftMinute: number;
   leftSecond: number;
+  percent: number;
 }
 
 const CountDown: React.FC = () => {
@@ -53,15 +62,30 @@ const CountDown: React.FC = () => {
   }, []);
 
   return (
-    <CountDownWrapper>
-      <TimeBlock time={leftTime.leftDay} unit="day" />
-      <TimeBlock time={":"} unit="" isSignal={true} />
-      <TimeBlock time={leftTime.leftHour} unit="hour" />
-      <TimeBlock time={":"} unit="" isSignal={true} />
-      <TimeBlock time={leftTime.leftMinute} unit="min" />
-      <TimeBlock time={":"} unit="" isSignal={true} />
-      <TimeBlock time={leftTime.leftSecond} unit="sec" />
-    </CountDownWrapper>
+    <>
+      <CountDownWrapper>
+        <TimeBlock time={leftTime.leftDay} unit="day" />
+        <TimeBlock time={":"} unit="" isSignal={true} />
+        <TimeBlock time={leftTime.leftHour} unit="hour" />
+        <TimeBlock time={":"} unit="" isSignal={true} />
+        <TimeBlock time={leftTime.leftMinute} unit="min" />
+        <TimeBlock time={":"} unit="" isSignal={true} />
+        <TimeBlock time={leftTime.leftSecond} unit="sec" />
+      </CountDownWrapper>
+      <Progress
+        percent={leftTime.percent}
+        style={{
+          maxWidth: "600px",
+          marginTop: "20px",
+          fontSize: "20px",
+          fontWeight: "bold",
+        }}
+        strokeColor={{
+          from: "#108ee9",
+          to: "#87d068",
+        }}
+      />
+    </>
   );
 };
 
