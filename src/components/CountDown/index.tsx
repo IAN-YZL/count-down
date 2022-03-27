@@ -17,8 +17,8 @@ const MINUTE_DOMINATOR = SECOND_DOMINATOR * 60;
 const HOUR_DOMINATOR = MINUTE_DOMINATOR * 60;
 const DAY_DOMINATOR = HOUR_DOMINATOR * 24;
 
-const TARGET_TIME = "2022-08-27 18:30:00 GMT-500";
-const START_TIME = "2022-03-03 10:00:00 GMT-500";
+const TARGET_TIME = "2022-08-27T18:30:00.000-05:00";
+const START_TIME = "2022-03-03T10:00:00.000-0500";
 
 const getTime = (): TimeProps => {
   let leftTime = new Date(TARGET_TIME).getTime() - new Date().getTime();
