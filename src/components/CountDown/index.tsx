@@ -4,12 +4,12 @@ import styled from "styled-components";
 import { Progress } from "antd";
 
 const CountDownWrapper = styled.div`
-  background-color: rgb(128, 6, 0, 0.6);
+  background-color: rgb(0, 51, 255, 0.6);
   display: flex;
   filter: brightness(1.5);
   padding: 36px;
   border-radius: 3px;
-  box-shadow: 0 0 15px rgb(185, 55, 48);
+  box-shadow: 0 0 15px rgb(46, 84, 253);
 `;
 
 const SECOND_DOMINATOR = 1000;
@@ -81,7 +81,7 @@ const CountDown: React.FC = () => {
           fontSize: "20px",
           fontWeight: "bold",
         }}
-        strokeColor="#ffff3d"
+        strokeColor="#0030f3"
         steps={100}
         size="small"
       />
