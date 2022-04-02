@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const UnitText = styled.p`
   text-transform: uppercase;
-  font-size: 12px;
+  font-size: 24px;
   margin: 0;
 `;
 
@@ -18,9 +18,8 @@ const TimeBlockWrapper = styled.div<WrapperProps>`
 `;
 
 const NumberText = styled.p`
-  font-size: 36px;
+  font-size: 60px;
   margin: 0;
-  margin: 0 0 10px 0;
 `;
 
 interface Props {

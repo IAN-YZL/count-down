@@ -22,14 +22,14 @@ const START_TIME = "2022-03-03T10:00:00.000-0500";
 
 const getTime = (): TimeProps => {
   let leftTime = new Date(TARGET_TIME).getTime() - new Date().getTime();
-  const leftDay = Math.ceil(leftTime / DAY_DOMINATOR);
+  const leftDay = Math.floor(leftTime / DAY_DOMINATOR);
   leftTime = leftTime % DAY_DOMINATOR;
-  const leftHour = Math.ceil(leftTime / HOUR_DOMINATOR);
+  const leftHour = Math.floor(leftTime / HOUR_DOMINATOR);
   leftTime = leftTime % HOUR_DOMINATOR;
-  const leftMinute = Math.ceil(leftTime / MINUTE_DOMINATOR);
+  const leftMinute = Math.floor(leftTime / MINUTE_DOMINATOR);
   leftTime = leftTime % MINUTE_DOMINATOR;
-  const leftSecond = Math.ceil(leftTime / SECOND_DOMINATOR);
-  const percent = Math.floor(
+  const leftSecond = Math.floor(leftTime / SECOND_DOMINATOR);
+  const percent = Math.ceil(
     ((new Date().getTime() - new Date(START_TIME).getTime()) /
       (new Date(TARGET_TIME).getTime() - new Date(START_TIME).getTime())) *
       100
@@ -73,6 +73,7 @@ const CountDown: React.FC = () => {
         <TimeBlock time={leftTime.leftSecond} unit="sec" />
       </CountDownWrapper>
       <Progress
+        className="red-text"
         percent={leftTime.percent}
         style={{
           maxWidth: "600px",
@@ -80,10 +81,9 @@ const CountDown: React.FC = () => {
           fontSize: "20px",
           fontWeight: "bold",
         }}
-        strokeColor={{
-          from: "#108ee9",
-          to: "#87d068",
-        }}
+        strokeColor="#ffff3d"
+        steps={100}
+        size="small"
       />
     </>
   );

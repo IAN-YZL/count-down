@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import background from "../assets/Toronto.jpg";
+import background from "../assets/pacman.png";
 import CountDown from "./CountDown";
 
 const CardBackground = styled.div`
   background-image: ${`url(${background})`};
-  min-width: 900px;
+  min-width: 1200px;
   min-height: 600px;
   background-position: center; /* Center the image */
   background-repeat: no-repeat; /* Do not repeat the image */
