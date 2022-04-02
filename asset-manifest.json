@@ -1,14 +1,13 @@
 {
   "files": {
-    "main.css": "/count-down/static/css/main.c1080fa7.css",
-    "main.js": "/count-down/static/js/main.f09b4b47.js",
-    "static/media/Toronto.jpg": "/count-down/static/media/Toronto.1fb0aa1d93a4e0a37640.jpg",
+    "main.css": "/count-down/static/css/main.4d570592.css",
+    "main.js": "/count-down/static/js/main.835d9898.js",
     "index.html": "/count-down/index.html",
-    "main.c1080fa7.css.map": "/count-down/static/css/main.c1080fa7.css.map",
-    "main.f09b4b47.js.map": "/count-down/static/js/main.f09b4b47.js.map"
+    "main.4d570592.css.map": "/count-down/static/css/main.4d570592.css.map",
+    "main.835d9898.js.map": "/count-down/static/js/main.835d9898.js.map"
   },
   "entrypoints": [
-    "static/css/main.c1080fa7.css",
-    "static/js/main.f09b4b47.js"
+    "static/css/main.4d570592.css",
+    "static/js/main.835d9898.js"
   ]
 }
