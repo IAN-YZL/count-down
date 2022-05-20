@@ -17,11 +17,19 @@ const MINUTE_DOMINATOR = SECOND_DOMINATOR * 60;
 const HOUR_DOMINATOR = MINUTE_DOMINATOR * 60;
 const DAY_DOMINATOR = HOUR_DOMINATOR * 24;
 
-const TARGET_TIME = "2022-08-27T18:30:00.000-05:00";
+const TARGET_TIME = {
+  TORONTO: "2022-08-27T18:30:00.000-05:00",
+  WEDDING: "2022-10-02T15:30:00.000-05:00",
+};
+// const TARGET_TIME = "2022-08-27T18:30:00.000-05:00";
+// const WEDDING_TIME = "2022-10-02T15:30:00.000-05:00";
 const START_TIME = "2022-03-03T10:00:00.000-0500";
 
-const getTime = (): TimeProps => {
-  let leftTime = new Date(TARGET_TIME).getTime() - new Date().getTime();
+export type TargetTimeType = keyof typeof TARGET_TIME;
+
+const getTime = (target: TargetTimeType): TimeProps => {
+  const targetTime = TARGET_TIME[target];
+  let leftTime = new Date(targetTime).getTime() - new Date().getTime();
   const leftDay = Math.floor(leftTime / DAY_DOMINATOR);
   leftTime = leftTime % DAY_DOMINATOR;
   const leftHour = Math.floor(leftTime / HOUR_DOMINATOR);
@@ -31,7 +39,7 @@ const getTime = (): TimeProps => {
   const leftSecond = Math.floor(leftTime / SECOND_DOMINATOR);
   const percent = Math.ceil(
     ((new Date().getTime() - new Date(START_TIME).getTime()) /
-      (new Date(TARGET_TIME).getTime() - new Date(START_TIME).getTime())) *
+      (new Date(targetTime).getTime() - new Date(START_TIME).getTime())) *
       100
   );
   return {
@@ -51,15 +59,19 @@ interface TimeProps {
   percent: number;
 }
 
-const CountDown: React.FC = () => {
-  const [leftTime, setLeftTime] = useState<TimeProps>(getTime());
+type Props = {
+  targetTime: TargetTimeType;
+};
+
+const CountDown: React.VFC<Props> = ({ targetTime }: Props) => {
+  const [leftTime, setLeftTime] = useState<TimeProps>(getTime(targetTime));
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setLeftTime(getTime());
-    }, 1000);
+      setLeftTime(getTime(targetTime));
+    }, 500);
     return () => clearInterval(interval);
-  }, []);
+  }, [targetTime]);
 
   return (
     <>

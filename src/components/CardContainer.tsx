@@ -1,7 +1,9 @@
-import React from "react";
+import { Switch } from "antd";
+import { SwitchChangeEventHandler } from "antd/lib/switch";
+import React, { useState } from "react";
 import styled from "styled-components";
 import background from "../assets/pacman.png";
-import CountDown from "./CountDown";
+import CountDown, { TargetTimeType } from "./CountDown";
 
 const CardBackground = styled.div`
   background-image: ${`url(${background})`};
@@ -18,10 +20,37 @@ const CardBackground = styled.div`
   text-align: center;
 `;
 
+const StyledSwitch = styled(Switch)`
+  margin-bottom: 30px;
+  height: 48px;
+  width: 200px;
+  span {
+    font-size: 50px;
+  }
+  div {
+    top: 15px;
+  }
+`;
+
 const CardContainer: React.FC = () => {
+  const [targetType, setTargetType] = useState<TargetTimeType>("TORONTO");
+
+  const handleSwitch: SwitchChangeEventHandler = (checked) => {
+    if (checked) {
+      setTargetType("WEDDING");
+    } else {
+      setTargetType("TORONTO");
+    }
+  };
+
   return (
     <CardBackground>
-      <CountDown />
+      <StyledSwitch
+        checkedChildren="Wedding"
+        unCheckedChildren="Toronto"
+        onChange={handleSwitch}
+      />
+      <CountDown targetTime={targetType} />
     </CardBackground>
   );
 };
